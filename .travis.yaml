@@ -2,11 +2,7 @@ language: minimal
 
 services: docker
 
-stages:
-  - build
-  - test
-  - name: deploy
-    if: branch = master
+node_js: 12
 
 env:
   global:
@@ -17,12 +13,10 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - echo 'dockerhub credentials configured'
 
-jobs:
-  include:
-    - stage: build
-      script:
-      - docker-compose -f docker-compose-build.yaml build --parallel
-      - docker push ifahadashraf/udagram-restapi-feed
-      - docker push ifahadashraf/udagram-restapi-user
-      - docker push ifahadashraf/udagram-frontend
-      - docker push ifahadashraf/reverseproxy
+script:
+  - docker-compose -f docker-compose-build.yaml build --parallel
+  - docker push ifahadashraf/udagram-restapi-feed
+  - docker push ifahadashraf/udagram-restapi-user
+  - docker push ifahadashraf/udagram-frontend
+  - docker push ifahadashraf/reverseproxy
+      
