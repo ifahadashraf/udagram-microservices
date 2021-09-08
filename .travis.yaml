@@ -1,0 +1,28 @@
+language: minimal
+
+services: docker
+
+stages:
+  - build
+  - test
+  - name: deploy
+    if: branch = master
+
+env:
+  global:
+    - DOCKER_COMPOSE_VERSION=1.29.2
+
+before_install:
+  - echo 'docker-compose installed and configured'
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo 'dockerhub credentials configured'
+
+jobs:
+  include:
+    - stage: build
+      script:
+      - docker-compose -f docker-compose-build.yaml build --parallel
+      - docker push ifahadashraf/udagram-restapi-feed
+      - docker push ifahadashraf/udagram-restapi-user
+      - docker push ifahadashraf/udagram-frontend
+      - docker push ifahadashraf/reverseproxy
