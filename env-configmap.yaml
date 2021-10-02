@@ -7,6 +7,6 @@ data:
   JWT_SECRET: hello
   DB_NAME: postgres
   ACCESS_CONTROL_ALLOW_ORIGIN: '*'
-  DB_HOST: database-1.ckb5zlpnq30f.us-east-1.rds.amazonaws.com
+  DB_HOST: database-1.cl6fsumcvvk3.us-east-1.rds.amazonaws.com
 metadata:
   name: env-config
