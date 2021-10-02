@@ -15,6 +15,10 @@ before_install:
 
 script:
   - docker-compose -f docker-compose-build.yaml build --parallel
+  - docker tag udagram-restapi-feed ifahadashraf/udagram-restapi-feed:v1
+  - docker tag udagram-restapi-user ifahadashraf/udagram-restapi-user:v1
+  - docker tag udagram-frontend ifahadashraf/udagram-frontend:v1
+  - docker tag reverseproxy ifahadashraf/reverseproxy:v1
   - docker push ifahadashraf/udagram-restapi-feed
   - docker push ifahadashraf/udagram-restapi-user
   - docker push ifahadashraf/udagram-frontend
